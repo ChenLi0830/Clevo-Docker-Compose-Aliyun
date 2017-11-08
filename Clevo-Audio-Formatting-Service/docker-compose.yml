@@ -1,0 +1,15 @@
+version: '2'
+services:
+  web:
+    image: clevo/audio-formatting-service
+    volumes:
+      - './app:/app:rw' # used for dev
+      # - 'clevo-server-dev-uswest:/app:rw' # dev
+      # - 'clevo-server-dev:/app:rw' # staging
+      - '/app/node_modules/' # make sure /app/node_modules is empty initially, and detach from oss
+    ports:
+      - "3030:3000"
+    labels:
+      aliyun.routing.port_3000: audio-formatting
+      aliyun.scale: '2'      
+    command: bash -c "cd /app && npm install && node app.js"
