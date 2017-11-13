@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/ChenLi0830/Clevo-Docker-Compose-Aliyun#readme",
   "dependencies": {
+    "ali-oss": "^4.11.2",
     "dotenv": "^4.0.0",
     "npm-bundle": "^3.0.3"
   }
