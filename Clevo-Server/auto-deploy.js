@@ -19,12 +19,11 @@ npmBundle(args, options, function onNpmBundle (error, output) {
   }
   process.stdout.write(output.file)
   console.log('------ Success ------')
-})
 
-// Upload tarball to OSS
-console.log('------ Uploading tar file to OSS ------')
-let filePath = `./${fileName}`
-ossClient.put(fileName, filePath)
+  // Upload tarball to OSS
+  console.log('------ Uploading tar file to OSS ------')
+  let filePath = `./${fileName}`
+  ossClient.put(fileName, filePath)
   .then(result => {
     if (result.res.statusCode === 200) {
       console.log('------ Success ------')
@@ -49,3 +48,4 @@ ossClient.put(fileName, filePath)
       console.log('Redeploy cluster Error', err)
     }
   })
+})
