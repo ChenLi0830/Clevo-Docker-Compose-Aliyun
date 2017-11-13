@@ -1,0 +1,23 @@
+{
+  "name": "docker-compose-aliyun",
+  "version": "1.0.0",
+  "description": "Docker compose files used to deploy the services in Aliyun",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChenLi0830/Clevo-Docker-Compose-Aliyun.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChenLi0830/Clevo-Docker-Compose-Aliyun/issues"
+  },
+  "homepage": "https://github.com/ChenLi0830/Clevo-Docker-Compose-Aliyun#readme",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "npm-bundle": "^3.0.3"
+  }
+}
