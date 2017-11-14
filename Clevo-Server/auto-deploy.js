@@ -32,17 +32,18 @@ npmBundle(args, options, function onNpmBundle (error, output) {
       throw new Error('tar file is not uploaded successfully')
     }
   })
+
   // Redeploy container
   .then(url => {
     console.log('------ Redeploying cluster ------')
     let certDir = `~/.docker/aliyun/${process.env.STAGE}_cluster`
     let clusterUrl = process.env[`${process.env.STAGE}_DOCKER_CLUSTER_URL`]
     let projectName = process.env[`${process.env.STAGE}_PROJECT_NAME`]
-
-    // console.log('curl command', `curl --insecure --cert ${certDir}/cert.pem --key ${certDir}/key.pem -X POST ${clusterUrl}/projects/${projectName}/redeploy`)
+    let curlCommand = `curl --insecure --cert ${certDir}/cert.pem --key ${certDir}/key.pem -X POST ${clusterUrl}/projects/${projectName}/redeploy`
+    console.log('curlCommand', curlCommand)
     try {
-        // Todo: use node request / fetch to make the rest call
-      childProcess.execSync(`curl --insecure --cert ${certDir}/cert.pem --key ${certDir}/key.pem -X POST ${clusterUrl}/projects/${projectName}/redeploy`)
+      // Todo: use node request / fetch to make the rest call
+      childProcess.execSync(curlCommand)
       console.log('------ Success ------')
     } catch (err) {
       console.log('Redeploy cluster Error', err)
