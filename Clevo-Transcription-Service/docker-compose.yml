@@ -1,0 +1,16 @@
+asr-service-test:
+  restart: always
+  ports:
+    - 8080/tcp
+  memswap_limit: 0
+  labels:
+    aliyun.scale: '1'
+    aliyun.routing.port_8080: asr-service-test
+  shm_size: 0
+  image: 'tomcat:latest'
+  memswap_reservation: 0
+  volumes:
+    - 'java-test:/app:rw'
+  kernel_memory: 0
+  mem_limit: 0
+  command: bash -c "cp /app/java/*.war /usr/local/tomcat/webapps"
