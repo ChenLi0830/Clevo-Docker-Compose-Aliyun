@@ -1,17 +1,18 @@
 version: '2'
 services:
-  web:
+  Clevo-Categorization:
     image: clevo/nlp-flask
     ports:
-      - "80:80"
+      - "9000:9000"
     labels:
       aliyun.scale: '2'
-      aliyun.routing.port_80: categorization
+      aliyun.routing.port_9000: categorization
     volumes:
+      # - ./app:/app
       - 'nlp-service-us-west:/app:rw'  
     environment:
       - FLASK_APP=main.py
       - FLASK_DEBUG=1
-      - 'RUN=flask run --host=0.0.0.0 --port=80'
-    command: bash -c "cd /app && flask run --host=0.0.0.0 --port=80"
+      - fast_disk_path=/dev/xvda
+    command: bash -c "cd /app && flask run --host=0.0.0.0 --port=9000"
 
