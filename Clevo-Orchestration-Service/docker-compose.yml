@@ -4,17 +4,20 @@ services:
     image: 'node:8.9'
     restart: always
     ports:
-      - '1235:3000'
+      - '3000:3000'
     volumes:
-      # - './app:/app:rw' # used for dev
-      - 'service-orchestration-dev-uswest:/app:rw' # staging
+      - './app:/app:rw' # used for dev
+      # - 'service-orchestration-dev-uswest:/app:rw' # staging
       - '/app/node_modules/' # make sure /app/node_modules is empty initially, and detach from oss
     environment:
       - 'NODE_ENV=dev'
       - 'FORMAT_AUDIO_ENDPOINT=http://audio-formatting.c8689b5863ec444e5bba9a51e950e18fc.us-west-1.alicontainer.com/graphql'
+      - 'TRANSCRIBE_SPEECH_ENDPOINT=http://transcription.c8689b5863ec444e5bba9a51e950e18fc.us-west-1.alicontainer.com/transcription/graphql'
+      - 'SENTENCE_CATEGORIZATION_ENDPOINT=http://categorization.c8689b5863ec444e5bba9a51e950e18fc.us-west-1.alicontainer.com/graphql'
+      - 'SERVER_ENDPOINT=http://clevo-server.c8689b5863ec444e5bba9a51e950e18fc.us-west-1.alicontainer.com/graphql'
+      - 'EMOTION_RECOGNITION_ENDPOINT=http://emotion.c8689b5863ec444e5bba9a51e950e18fc.us-west-1.alicontainer.com/graphql'
     labels:
       aliyun.routing.port_3000: orchestration
       aliyun.scale: '2'
     command: bash -c "cd /app && npm install && node app.js"
     # command: tail -F something
-    
