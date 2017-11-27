@@ -1,0 +1,21 @@
+version: '2'
+services:
+  Clevo-Audio-Formatting:
+    image: 'node:8.9'
+    volumes:
+      - './:/app:rw' # used for dev
+      # - 'clevo-audio-preprocessing-dev:/app:rw' # dev
+      - '/node_modules/' # make sure /app/node_modules is empty initially, and detach from oss
+    ports:
+      - '8090:8090'
+    environment:
+      - 'PORT=8090'
+      - 'NODE_ENV=production'
+      - 'DEBUG=*,-babel,-*.test'
+      - 'ACCESS_KEY_ID=GmlKX8nNzlAlVDJG'
+      - 'ACCESS_KEY_SECRET=AXtBs4SbUXWPnjRRPqO9vmzAN76QDw'
+    labels:
+      aliyun.routing.port_8090: transcriptionJS
+      aliyun.scale: '2'
+    command: bash -c "cd /app && npm install && node app.js"
+    # command: tail -F anything
